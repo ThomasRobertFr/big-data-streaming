@@ -1,0 +1,1 @@
+This repository contains a school project aiming to deploy a Big Data architecture for tweet streaming sentiment analysis, using Kafka and Spark.
