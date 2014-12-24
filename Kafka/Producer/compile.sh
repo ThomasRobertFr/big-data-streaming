@@ -1,0 +1,1 @@
+javac -classpath libs/kafka_2.9.2-0.8.1.1.jar:libs/scala-library-2.9.2.jar:libs/twitter4j-async-4.0.2.jar:libs/twitter4j-core-4.0.2.jar:libs/twitter4j-examples-4.0.2.jar:libs/twitter4j-media-support-4.0.2.jar:libs/twitter4j-stream-4.0.2.jar:libs/json-20140107.jar:./ -sourcepath ./src -d ./classes ./src/ProducerKafka.java
