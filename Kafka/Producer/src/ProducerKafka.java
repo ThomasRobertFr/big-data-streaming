@@ -134,7 +134,7 @@ public class ProducerKafka {
             BufferedReader entree = new BufferedReader(new InputStreamReader(System.in));
             String inChar = entree.readLine();
             String topic = "TweetStatus";
-            String[] word = {"#IronMan3"};
+            String[] word = {"Hobbit"};
             String[] lang = {"en"};
             if(inChar.equals("1")){
                 startProducerFromTwitter(topic, word, lang);
