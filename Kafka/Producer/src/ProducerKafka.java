@@ -44,6 +44,7 @@ public class ProducerKafka {
             List<KeyedMessage<String,String>> msgList=new ArrayList<KeyedMessage<String,String>>();
             int batchSize=200;
             int count=0;
+            String language;
             while (true) {
                 String line=reader.readLine();
                 if (line == null){
@@ -51,7 +52,12 @@ public class ProducerKafka {
                 }
                 count++;
                 JSONObject jsonObj = new JSONObject(line);
-                String language = jsonObj.getString("lang");
+                if(jsonObj.has("lang")){
+                    language = jsonObj.getString("lang");
+                }
+                else{
+                    language = "noLanguageDefined";
+                }
                 if(language.equals("en")){
                     String texte = jsonObj.getString("text");
                     KeyedMessage<String,String> msg=new KeyedMessage<String,String>(topic, texte);
