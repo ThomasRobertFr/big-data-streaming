@@ -30,7 +30,7 @@ public class ProducerKafka {
 
     public static Producer<String,String> getProducer(){
         Properties props=new Properties();
-        props.put("metadata.broker.list", "130.211.159.140:9092,146.148.52.242:9093,130.211.157.38:9094");
+        props.put("metadata.broker.list", "casi-m.c.casi-bigdata.internal:9092,casi-w-0.c.casi-bigdata.internal:9093,casi-w-1.c.casi-bigdata.internal:9094");
         props.put("zk.connect","localhost:2181");
         props.put("serializer.class","kafka.serializer.StringEncoder");
         ProducerConfig producerConfig=new ProducerConfig(props);
@@ -51,12 +51,15 @@ public class ProducerKafka {
                 }
                 count++;
                 JSONObject jsonObj = new JSONObject(line);
-                String texte = jsonObj.getString("text");
-                KeyedMessage<String,String> msg=new KeyedMessage<String,String>(topic, texte);
-                msgList.add(msg);
-                if (msgList.size() > batchSize) {
-                    producer.send(msgList);
-                    msgList.clear();
+                String language = jsonObj.getString("lang");
+                if(language.equals("en")){
+                    String texte = jsonObj.getString("text");
+                    KeyedMessage<String,String> msg=new KeyedMessage<String,String>(topic, texte);
+                    msgList.add(msg);
+                    if (msgList.size() > batchSize) {
+                        producer.send(msgList);
+                        msgList.clear();
+                    }
                 }
             }
             if (msgList.size() > 0) {
