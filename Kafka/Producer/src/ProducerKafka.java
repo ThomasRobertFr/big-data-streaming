@@ -42,7 +42,7 @@ public class ProducerKafka {
         try{
             BufferedReader reader=new BufferedReader(new InputStreamReader(new FileInputStream(file)));
             List<KeyedMessage<String,String>> msgList=new ArrayList<KeyedMessage<String,String>>();
-            int batchSize=200;
+            int batchSize=10;
             int count=0;
             String language;
             while (true) {
@@ -65,6 +65,7 @@ public class ProducerKafka {
                     if (msgList.size() > batchSize) {
                         producer.send(msgList);
                         msgList.clear();
+                        Thread.sleep(2000);
                     }
                 }
             }
